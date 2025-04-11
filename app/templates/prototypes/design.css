@@ -1,0 +1,173 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F0F8FF;
+}
+
+/* Navigation Bar */
+.topnav {
+    background-color: #1A6E1A; /* Darker Forest Green */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.topnav a {
+    color: #FFFFFF; /* White */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 15px;
+}
+
+.topnav a:hover {
+    background-color: #006666; /* Slightly darker Teal */
+    border-radius: 5px;
+    padding: 14px 16px;
+}
+
+.active {
+    background-color: #004B00; /* Darker Dark Green */
+    border-radius: 5px;
+}
+
+/* Welcome Section (Index Page) */
+.welcome-page-title {
+    text-align: center;
+    font-size: 3em;
+    width: 350px;
+    height: 100px;
+    margin: 20px auto;
+    color: #1A6E1A;
+    background-color: #E6F4E6;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.welcome-page-description {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 20px auto;
+    color: #004B00;
+    background-color: #E6F4E6;
+    padding: 15px;
+    max-width: 60%;
+    border-radius: 8px;
+}
+
+/* Buttons (Index Page) */
+.welcome-btn {
+    text-align: center;
+    background-color: #1A6E1A;
+    color: #FFFFFF;
+    padding: 14px 20px;
+    margin: 16px auto;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    font-size: 1.5em;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.welcome-btn:hover {
+    background-color: #006666;
+}
+
+/* Flashcard Styles */
+.flashcard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    margin-top: 20px;
+}
+
+.flashcard {
+    width: 300px;
+    height: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flashcard-inner {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #E6F4E6;
+    color: #004B00;
+    padding: 20px;
+}
+
+.flashcard-back {
+    background-color: #1A6E1A;
+    color: #FFFFFF;
+    transform: rotateY(180deg);
+}
+
+/* Navigation Buttons (Flashcards) */
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.nav-buttons button {
+    background-color: #1A6E1A;
+    color: #FFFFFF;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.nav-buttons button:hover {
+    background-color: #006666;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #1A6E1A;
+    color: white;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
