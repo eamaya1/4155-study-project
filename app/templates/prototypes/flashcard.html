@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+            <a href="index.html">Home</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="login.html">Log In</a>
+            <a href="flashcard.html" class="active">Flashcards</a>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="welcome-page-title">Flashcards</h1>
+        <div class="flashcard-container">
+            <div class="flashcard" onclick="flipCard()">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front" id="flashcard-front">Question 1</div>
+                    <div class="flashcard-back" id="flashcard-back">Answer 1</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button onclick="prevCard()">Previous</button>
+            <button onclick="nextCard()">Next</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Flash-Cash </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
