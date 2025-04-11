@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Test Upload{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+{% endblock %}
+
+{% block nav %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <h1>Upload Flashcards</h1>
+    <form action="/flashcards/upload" method="POST" enctype="multipart/form-data">
+        <!-- Set Name Field -->
+        <label for="setName">Set Name:</label>
+        <input type="text" id="setName" name="setName" required><br><br>
+
+        <!-- Set Description Field -->
+        <label for="setDescription">Set Description:</label>
+        <textarea id="setDescription" name="setDescription" required></textarea><br><br>
+
+        <!-- File Upload Field for Markdown File -->
+        <label for="file">Upload Markdown File:</label>
+        <input type="file" id="file" name="file" accept=".md" required><br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Upload</button>
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock %}

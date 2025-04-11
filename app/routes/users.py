@@ -1,11 +1,12 @@
-from flask import Blueprint, current_app, jsonify, request
+from flask import Blueprint, current_app, jsonify, request, session
 from bson.objectid import ObjectId
 import pymongo
 import pymongo.errors
 from .flashcards import flashcard_bp
-from ..models.user import get_user_by_id, delete_user_by_id, get_users, create_user, save_user
+from ..models.user import get_user_by_id, delete_user_by_id, get_users, create_user, save_user, login_and_validate_user
 from ..models.schema import UserSchema
 from marshmallow import ValidationError
+from werkzeug.security import check_password_hash
 
 
 user_bp = Blueprint('users', __name__, url_prefix='/users')
@@ -99,3 +100,32 @@ def del_user_by_id_route(user_id):
 # Could be used for updating passwords, not sure yet..
 # @user_bp.route('/<user_id>', methods=["PUT"])
 # def update_user_by_id(user_id, updated_value):
+
+
+
+# POST /users/login
+# When a user clicks login in the login page, the request should include the email and password, that password is checked through a hash
+# and a session is created with the user id and the email
+@user_bp.route('/login', methods=["POST"])
+def login_user():  
+    logged_in = login_and_validate_user(request)
+    if logged_in:
+        return jsonify({"Success": "You successfully logged in"}, 200)
+    else:
+        return jsonify({"error": "You were unable to login, please check email or password"}, 401)
+    
+
+# POST /users/logout
+# Very simply just clears the session if there's a user actively logged in
+@user_bp.route("/logout", methods=["POST"])
+def logout_user():
+    try:
+        if 'user_id' not in session:
+            return jsonify({"error": "There is no user logged in"}), 401
+
+        session.clear()
+        return jsonify({"message": "Successfully logged out"}), 200
+
+    except Exception as e:
+        print(f"Logout Error: {e}")
+        return jsonify({"error": "An error occurred during logout"}), 500

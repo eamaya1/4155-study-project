@@ -1,8 +1,9 @@
 from bson import json_util
 from bson.objectid import ObjectId
-from flask import Blueprint, current_app, jsonify, request
+from flask import Blueprint, current_app, jsonify, request, session
 from ..models.schema import UserSchema
 from marshmallow import ValidationError
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 def get_id_from_username(username):
@@ -85,7 +86,8 @@ def delete_user_by_id(user_id):
 def create_user(user_data):
     user_schema = UserSchema()
     validated_user = user_schema.load(user_data)
-    # Add in some type of password hash before saving the user so db doesn't hold naked passwords
+    
+    validated_user['password'] = generate_password_hash(validated_user['password'])
 
     return validated_user
 
@@ -100,3 +102,21 @@ def save_user(validated_user):
     except Exception as e:
         print(e)
         return None
+    
+
+def login_and_validate_user(request):
+    db = current_app.config['DB']
+    collection = db['users']
+
+    # The data should be the email and password in JSON
+    data = request.json
+
+    user = collection.find_one({"email": data.get("email")})
+
+    if user and check_password_hash(user['password'], data.get("password")):
+        session['user_id'] = str(user['_id'])
+        session['email'] = user['email']
+
+        return True
+    else:
+        return False

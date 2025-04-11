@@ -22,7 +22,7 @@ def save_set_to_flashcard_collection(flashcards):
         set_id = collection.insert_one(flashcards).inserted_id
         set_id = str(set_id)
 
-        return set_id, None
+        return set_id
     except Exception as e:
         print(e)
         return None
@@ -113,12 +113,12 @@ def delete_set_from_flashcard_collection(set_id):
         return False
 
 # Technically an update function on a study set. $unset aggregation
-def delete_flashcard_for_user(set_id, flashcard_index):
+def delete_flashcard_for_user(user_id, set_id):
     db = current_app.config['DB']
-    collection = db['flashcards']
+    collection = db['users']
 
     try:
-        result = collection.update_one({"_id": ObjectId(set_id)}, {"$unset": {f"flashcard.{flashcard_index}": 1}})
+        result = collection.update_one({"_id": ObjectId(user_id)}, {"$unset": {f"flashcards.{set_id}": 1}})
         return result.modified_count > 0
     except Exception as e:
         print(e)
